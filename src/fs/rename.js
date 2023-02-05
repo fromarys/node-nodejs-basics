@@ -8,7 +8,11 @@ const __dirname = dirname(__filename);
 const renameFile = async () => {
    const wrongFile = join(__dirname, 'files', 'wrongFilename.txt');
    const correctFile = join(__dirname, 'files', 'wrongFilename.txt');
-   await rename(wrongFile, correctFile);
+   try {
+      await rename(wrongFile, correctFile);
+   } catch (err) {
+      throw new Error('FS operation failed');
+   }
 };
 
 await renameFile();
